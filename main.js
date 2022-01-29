@@ -8,6 +8,7 @@ let minute = 0;
 let seconds = 0;
 let millisecond = 0;
 
+let interval;
 
 function stopWatch(){
   millisecond++;
@@ -27,10 +28,27 @@ function stopWatch(){
 }
 
 start.addEventListener("click", function(){
-  setInterval(stopWatch, 100);
+  interval = setInterval(stopWatch, 100);
+  　start.disabled = true;
+  stop.disabled = false;
+  reset.disabled = false;
   });
 
 stop.addEventListener("click", function(){
-  clearInterval(stopWatch);
+  clearInterval(interval);
+  start.disabled = false;
+  stop.disabled = true;
+  reset.disabled = false;
   });
-stopWatch();
+
+reset.addEventListener("click", function() {
+    clearInterval(interval);
+    timer.innerHTML = "0:0:0:0";
+     hours = 0;
+     minute = 0;
+     seconds = 0;
+     millisecond = 0;
+　start.disabled = false;
+  stop.disabled = true;
+  reset.disabled = true;
+});
